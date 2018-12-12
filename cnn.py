@@ -47,8 +47,19 @@ model.add(Dense(10,activation='softmax'))
 print(model.summary())
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+
+try:
+    model.load_weights('my_model.h5')
+    print("load model success")
+except:
+    print("retrain")
+    
 train_history = model.fit(x=x_Train4D_normalize,
                           y=y_TrainOneHot, validation_split=0.2, epochs=10, batch_size=300, verbose=2)
+
+model.save_weights('my_model.h5')
+
 
 
 #
